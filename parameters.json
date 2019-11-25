@@ -1,0 +1,71 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "FortiGateName": {
+            "value": "FGT01"
+        },
+        "adminUsername": {
+            "value": "fgtadmin"
+        },
+        "adminPassword": {
+            "value": "Fort!Lab2019"
+        },
+        "FortiGateImageSKU": {
+            "value": "fortinet_fg-vm_payg_20190624"
+        },
+        "FortiGateImageVersion": {
+            "value": "6.2.2"
+        },
+        "instanceType": {
+            "value": "Standard_F4s"
+        },
+        "publicIPAddressName": {
+            "value": "PIP_FGT01"
+        },
+        "publicIPNewOrExistingOrNone": {
+            "value": "new"
+        },
+        "publicIPResourceGroup": {
+            "value": "RG_FGT01"
+        },
+        "publicIPAllocationMethod": {
+            "value": "Static"
+        },
+        "publicIPsku": {
+            "value": "Basic"
+        },
+        "location": {
+            "value": "eastus"
+        },
+        "vnetNewOrExisting": {
+            "value": "new"
+        },
+        "vnetName": {
+            "value": "FortigateProtectedVNet"
+        },
+        "vnetResourceGroup": {
+            "value": "RG_FGT01"
+        },
+        "vnetAddressPrefixes": {
+            "value": [
+                "10.255.0.0/16"
+            ]
+        },
+        "Subnet1Name": {
+            "value": "PublicFacingSubnet"
+        },
+        "Subnet1Prefix": {
+            "value": "10.255.255.0/24"
+        },
+        "Subnet2Name": {
+            "value": "InsideSubnet"
+        },
+        "Subnet2Prefix": {
+            "value": "10.255.254.0/24"
+        },
+        "AcceleratedNetworking": {
+            "value": true
+        }
+    }
+}
