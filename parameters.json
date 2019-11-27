@@ -12,7 +12,7 @@
       "value": "Fort!Lab2019"
     },
     "FortiGateName": {
-      "value": "FGT01"
+      "value": "FGT02"
     },
     "FortiGateImageSKU": {
       "value": "fortinet_fg-vm_payg"
@@ -24,10 +24,10 @@
       "value": "new"
     },
     "publicIPAddressName": {
-      "value": "PIP_FGT01"
+      "value": "PIP_FGT02"
     },
     "publicIPResourceGroup": {
-      "value": "RG_FGT01"
+      "value": "RG_FGT02"
     },
     "publicIPAddressType": {
       "value": "Static"
@@ -39,7 +39,7 @@
       "value": "VNET_Fortinet"
     },
     "vnetResourceGroup": {
-      "value": "RG_FGT01"
+      "value": "RG_FGT02"
     },
     "vnetAddressPrefix": {
       "value": "10.255.0.0/16"
@@ -51,7 +51,7 @@
       "value": "10.255.254.0/24"
     },
     "fortiGateIP1": {
-      "value": "10.255.254.2"
+      "value": "10.255.254.100"
     },
     "Subnet2Name": {
       "value": "NET_Inside"
@@ -60,7 +60,7 @@
       "value": "10.255.255.0/24"
     },
     "fortiGateIP2": {
-      "value": "10.255.255.2"
+      "value": "10.255.255.100"
     },
     "FortinetTags": {
       "value": {
