@@ -1,74 +1,74 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": {
-        "location": {
-            "value": "eastus"
-        },
-        "adminUsername": {
-            "value": "fgtadmin"
-        },
-        "adminPassword": {
-            "value": "Fort!Lab2019"
-        },
-        "fortiGateName": {
-            "value": "FGT01"
-        },
-        "fortiGateImageSKU": {
-            "value": "fortinet_fg-vm_payg"
-        },
-        "instanceType": {
-            "value": "Standard_D2_v2"
-        },
-        "publicIPNewOrExistingOrNone": {
-            "value": "new"
-        },
-        "publicIPAddressName": {
-            "value": "PIP_FGT01"
-        },
-        "publicIPResourceGroup": {
-            "value": "RG_FGT01"
-        },
-        "publicIPAddressType": {
-            "value": "Static"
-        },
-        "vnetNewOrExisting": {
-            "value": "new"
-        },
-        "vnetName": {
-            "value": "VNET_Fortinet"
-        },
-        "vnetResourceGroup": {
-            "value": "RG_FGT01"
-        },
-        "vnetAddressPrefix": {
-            "value": "10.255.0.0/16"
-        },
-        "subnet1Name": {
-            "value": "NET_Outside"
-        },
-        "subnet1Prefix": {
-            "value": "10.255.255.0/24"
-        },
-        "fortiGateIP1": {
-            "value": "10.255.255.2"
-        },
-        "subnet2Name": {
-            "value": "NET_Inside"
-        },
-        "subnet2Prefix": {
-            "value": "10.255.254.0/24"
-        },
-        "fortiGateIP2": {
-            "value": "10.255.254.2"
-        },
-        "fortinetTags": {
-            "value": {
-                "provider": "6EB3B02F-50E5-4A3E-8CB8-2E129258317D"
-            }
-        },
-        "artifactsBaseUrl": {
-            "value": "https://raw.githubusercontent.com/fortinetclouddev/FortigateAzureTemplate/5.3.7"
-        }
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "value": "eastus"
+    },
+    "adminUsername": {
+      "value": "fgtadmin"
+    },
+    "adminPassword": {
+      "value": "Fort!Lab2019"
+    },
+    "FortiGateName": {
+      "value": "FGT01"
+    },
+    "FortiGateImageSKU": {
+      "value": "fortinet_fg-vm_payg"
+    },
+    "instanceType": {
+      "value": "Standard_D2_v2"
+    },
+    "publicIPNewOrExistingOrNone": {
+      "value": "new"
+    },
+    "publicIPAddressName": {
+      "value": "PIP_FGT01"
+    },
+    "publicIPResourceGroup": {
+      "value": "RG_FGT01"
+    },
+    "publicIPAddressType": {
+      "value": "Static"
+    },
+    "vnetNewOrExisting": {
+      "value": "new"
+    },
+    "vnetName": {
+      "value": "VNET_Fortinet"
+    },
+    "vnetResourceGroup": {
+      "value": "RG_FGT01"
+    },
+    "vnetAddressPrefix": {
+      "value": "10.255.0.0/16"
+    },
+    "Subnet1Name": {
+      "value": "NET_Outside"
+    },
+    "Subnet1Prefix": {
+      "value": "10.255.254.0/24"
+    },
+    "fortiGateIP1": {
+      "value": "10.255.254.2"
+    },
+    "Subnet2Name": {
+      "value": "NET_Inside"
+    },
+    "Subnet2Prefix": {
+      "value": "10.255.255.0/24"
+    },
+    "fortiGateIP2": {
+      "value": "10.255.255.2"
+    },
+    "FortinetTags": {
+      "value": {
+        "provider": "6EB3B02F-50E5-4A3E-8CB8-2E129258317D"
+      }
+    },
+    "artifactsBaseUrl": {
+      "value": "https://raw.githubusercontent.com/fortinetclouddev/FortigateAzureTemplate/5.3.7"
     }
+  }
 }
