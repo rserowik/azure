@@ -1,0 +1,237 @@
+config system global
+    set admin-port 1080
+    set admin-sport 10443
+    set admin-ssh-port 1022
+    set alias "FGT01"
+    set gui-theme mariner
+    set hostname "FGT01"
+    set timezone 12
+end
+config system interface
+    edit "port1"
+        set vdom "root"
+        set mode dhcp
+        set allowaccess ping https ssh fgfm
+        set type physical
+        set alias "Outside"
+        set lldp-reception enable
+        set role wan
+        set snmp-index 1
+    next
+    edit "port2"
+        set vdom "root"
+        set ip 10.255.255.10 255.255.255.0
+        set allowaccess ping
+        set type physical
+        set alias "Inside"
+        set snmp-index 2
+    next
+    edit "AZ-2-Cust"
+        set vdom "root"
+        set type tunnel
+        set snmp-index 4
+        set interface "port1"
+    next
+end
+config firewall address
+    edit "SNET_FNAC01"
+        set subnet 10.255.255.100 255.255.255.255
+    next
+    edit "IP_FNAC01-eth0"
+        set subnet 10.255.255.100 255.255.255.255
+    next
+    edit "IP_FAZ01"
+        set subnet 10.255.255.4 255.255.255.255
+    next
+    edit "AZ-2-Cust_local_subnet_1"
+        set allow-routing enable
+        set subnet 10.255.255.0 255.255.255.0
+    next
+    edit "AZ-2-Cust_remote_subnet_1"
+        set allow-routing enable
+        set subnet 10.0.0.0 255.0.0.0
+    next
+    edit "AZ-2-Cust_remote_subnet_2"
+        set allow-routing enable
+        set subnet 172.16.0.0 255.240.0.0
+    next
+    edit "AZ-2-Cust_remote_subnet_3"
+        set allow-routing enable
+        set subnet 192.168.0.0 255.255.255.0
+    next
+end
+config firewall addrgrp
+    edit "AZ-2-Cust_local"
+        set member "AZ-2-Cust_local_subnet_1"
+        set allow-routing enable
+    next
+    edit "AZ-2-Cust_remote"
+        set member "AZ-2-Cust_remote_subnet_1" "AZ-2-Cust_remote_subnet_2" "AZ-2-Cust_remote_subnet_3"
+        set allow-routing enable
+    next
+end
+config vpn ssl settings
+    set port 1010
+end
+config vpn ipsec phase1-interface
+    edit "AZ-2-Cust"
+        set type dynamic
+        set interface "port1"
+        set peertype any
+        set net-device enable
+        set proposal aes128-sha256 aes256-sha256 aes128-sha1 aes256-sha1
+        set dpd on-idle
+        set wizard-type dialup-fortigate
+        set psksecret ENC k9iX6Zr0TIoeAL1Sass3aHx92k7YIPiRAq6X1MjdGTmgUWiaW6pEoLqzML5GQb37tw5i+q/LCHlc9ZdRenSnbcQCo8F/XUodzy96yOyJu3DzESMXdJadoR+kZhwRGs34AYAEvgL0VfUnXyeEC4u/jRYzIcHv1nO+5N/ntdK6ViG0Vd5/MrYuurERAj9noxZJtBgvAQ==
+        set dpd-retryinterval 60
+    next
+end
+config vpn ipsec phase2-interface
+    edit "AZ-2-Cust"
+        set phase1name "AZ-2-Cust"
+        set proposal aes128-sha1 aes256-sha1 aes128-sha256 aes256-sha256 aes128gcm aes256gcm chacha20poly1305
+        set src-addr-type name
+        set dst-addr-type name
+        set src-name "all"
+        set dst-name "AZ-2-Cust_remote"
+    next
+end
+config firewall vip
+    edit "VIP_WAN-2-FNAC01_TCP-8080"
+        set extip 10.255.254.10
+        set extintf "port1"
+        set portforward enable
+        set mappedip "10.255.255.100"
+        set extport 8080
+        set mappedport 8080
+    next
+    edit "VIP_WAN-2-FNAC01_TCP-8443"
+        set extip 10.255.254.10
+        set extintf "port1"
+        set portforward enable
+        set mappedip "10.255.255.100"
+        set extport 8443
+        set mappedport 8443
+    next
+    edit "VIP_WAN-2-FNAC01_TCP-22"
+        set extip 10.255.254.10
+        set extintf "port1"
+        set portforward enable
+        set mappedip "10.255.255.100"
+        set extport 822
+        set mappedport 22
+    next
+    edit "VIP_WAN-2-FAZ01_TCP-22"
+        set extip 10.255.254.10
+        set extintf "port1"
+        set portforward enable
+        set mappedip "10.255.255.110"
+        set extport 922
+        set mappedport 22
+    next
+    edit "VIP_WAN-2-FAZ01_TCP-80"
+        set extip 10.255.254.10
+        set extintf "port1"
+        set portforward enable
+        set mappedip "10.255.255.110"
+        set extport 980
+        set mappedport 80
+    next
+    edit "VIP_WAN-2-FAZ01_TCP-443"
+        set extip 10.255.254.10
+        set extintf "port1"
+        set portforward enable
+        set mappedip "10.255.255.110"
+        set extport 9443
+        set mappedport 443
+    next
+end
+config firewall vipgrp
+    edit "VIPG_WAN-2-FNAC01"
+        set interface "port1"
+        set member "VIP_WAN-2-FNAC01_TCP-22" "VIP_WAN-2-FNAC01_TCP-8080" "VIP_WAN-2-FNAC01_TCP-8443"
+    next
+    edit "VIPG_WAN-2-FAZ01"
+        set interface "port1"
+        set member "VIP_WAN-2-FAZ01_TCP-22" "VIP_WAN-2-FAZ01_TCP-443" "VIP_WAN-2-FAZ01_TCP-80"
+    next
+end
+config firewall policy
+    edit 1
+        set name "WAN-2-FNAC01"
+        set srcintf "port1"
+        set dstintf "port2"
+        set srcaddr "all"
+        set dstaddr "VIPG_WAN-2-FNAC01"
+        set action accept
+        set schedule "always"
+        set service "ALL"
+        set utm-status enable
+        set fsso disable
+        set ips-sensor "high_security"
+        set ssl-ssh-profile "certificate-inspection"
+    next
+    edit 5
+        set name "WAN-2-FAZ01"
+        set srcintf "port1"
+        set dstintf "port2"
+        set srcaddr "all"
+        set dstaddr "VIPG_WAN-2-FAZ01"
+        set action accept
+        set schedule "always"
+        set service "ALL"
+        set utm-status enable
+        set fsso disable
+        set ips-sensor "high_security"
+        set ssl-ssh-profile "certificate-inspection"
+    next
+    edit 4
+        set name "Inside-2-Outside"
+        set srcintf "port2"
+        set dstintf "port1"
+        set srcaddr "all"
+        set dstaddr "all"
+        set action accept
+        set schedule "always"
+        set service "ALL"
+        set utm-status enable
+        set fsso disable
+        set av-profile "default"
+        set dnsfilter-profile "default"
+        set ips-sensor "protect_client"
+        set application-list "block-high-risk"
+        set ssl-ssh-profile "certificate-inspection"
+        set nat enable
+    next
+    edit 6
+        set name "vpn_AZ-2-Cust_local"
+        set srcintf "port2"
+        set dstintf "AZ-2-Cust"
+        set srcaddr "AZ-2-Cust_local"
+        set dstaddr "AZ-2-Cust_remote"
+        set action accept
+        set schedule "always"
+        set service "ALL"
+    next
+    edit 7
+        set name "vpn_AZ-2-Cust_remote"
+        set srcintf "AZ-2-Cust"
+        set dstintf "port2"
+        set srcaddr "AZ-2-Cust_remote"
+        set dstaddr "AZ-2-Cust_local"
+        set action accept
+        set schedule "always"
+        set service "ALL"
+    next
+    edit 8
+        set name "vpn_AZ-2-Cust_share_internet"
+        set srcintf "AZ-2-Cust"
+        set dstintf "port1"
+        set srcaddr "AZ-2-Cust_remote"
+        set dstaddr "all"
+        set action accept
+        set schedule "always"
+        set service "ALL"
+        set nat enable
+    next
+end
