@@ -70,9 +70,6 @@
     "configURI": {
         "value": "https://raw.githubusercontent.com/rserowik/azure/master/FGT01_BOOTSTRAP.txt"
     },
-    "licenseURI": {
-        "value": ""
-    },
     "artifactsBaseUrl": {
       "value": "https://raw.githubusercontent.com/fortinetclouddev/FortigateAzureTemplate/5.3.7"
     }
