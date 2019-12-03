@@ -423,6 +423,7 @@
         "osProfile": {
           "computerName": "[variables('compute_VM_fg1_Name')]",
           "adminUsername": "[parameters('adminUsername')]",
+          "customData": "[base64(variables('userData'))]",
           "adminPassword": "[parameters('adminPassword')]"
         },
         "storageProfile": {
