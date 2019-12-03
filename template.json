@@ -158,12 +158,6 @@
       "provider": "6EB3B02F-50E5-4A3E-8CB8-2E129258317D"
       }
     },
-    "configURI": {
-      "type": "string",
-      "metadata": {
-         "description": "config text file URL"
-      }
-    },
     "artifactsBaseUrl": {
       "type": "string",
       "defaultValue": "https://raw.githubusercontent.com/fortinetclouddev/FortigateAzureTemplate/6.0.4",
