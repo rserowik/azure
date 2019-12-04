@@ -208,7 +208,7 @@
     "compute_AvailabilitySet_FG_Name": "[concat(parameters('FortiGateName'),'AvailSet')]",
     "compute_AvailabilitySet_FG_Id": "[resourceId('Microsoft.Compute/availabilitySets', variables('compute_AvailabilitySet_FG_Name'))]",
     
-    "userData": "[concat('{\"config-url\": \"', parameters('configURI'), '\"}\n']"
+    "userData": "[concat('{\"config-url\": \"', parameters('configURI'), '\"}\n')]"
     
   },
   "resources": [
